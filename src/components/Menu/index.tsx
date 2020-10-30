@@ -97,6 +97,8 @@ const Menu: React.FC<MenuProps> = ({
     [t('select_municipal'), 'counties'],
   ]);
 
+  const { MonthPicker } = DatePicker;
+
   const showTermsOfUseModal = () => {
     setTermsOfUseModal(true);
   };
@@ -154,6 +156,10 @@ const Menu: React.FC<MenuProps> = ({
     },
     [map],
   );
+
+  const handleDate = useCallback((date, dateString) => {
+    console.log(dateString);
+  }, []);
 
   let watershedsLabel = null;
   let watershedSelect = null;
@@ -330,11 +336,13 @@ const Menu: React.FC<MenuProps> = ({
         {codeNameSelect}
 
         <label>{t('label_date')}</label>
-        <DatePicker
-          picker="month"
+        <MonthPicker
           disabledDate={d => d.isBefore('2001-01') || d.isAfter('2019-12')}
+          defaultPickerValue={moment('2019-12', 'YYYY-MM')}
           defaultValue={moment('2019-12', 'YYYY-MM')}
           format={'YYYY-MM'}
+          onChange={handleDate}
+          placeholder="2019-12"
         />
 
         <LayerSwitcher
