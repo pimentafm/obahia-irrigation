@@ -243,22 +243,22 @@ const Menu: React.FC<MenuProps> = ({
     switch (category) {
       case 'regional':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/region/irrigation${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/region/irrigation_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
       case 'gcc':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/gcc/${defaultWatershed?.toLowerCase()}/irrigation${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/gcc/${defaultWatershed?.toLowerCase()}/irrigation_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
       case 'drainage':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/drainage/${defaultCodeName?.code}/irrigation_${defaultCodeName?.code}_${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/drainage/${defaultCodeName?.code}/irrigation_${defaultCodeName?.code}_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
       case 'counties':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/counties/irrigation_${defaultCodeName?.code}_${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/counties/irrigation_${defaultCodeName?.code}_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
     }
