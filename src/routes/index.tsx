@@ -2,16 +2,16 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Region from '../pages/Region';
-// import Watershed from '../pages/Watershed';
-// import Drainage from '../pages/Drainage';
-// import Counties from '../pages/Counties';
+import Watershed from '../pages/Watershed';
+import Drainage from '../pages/Drainage';
+import Counties from '../pages/Counties';
 
 const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={Region} />
-    {/* <Route path="/gcc" component={Watershed} />
+    <Route path="/gcc" component={Watershed} />
     <Route path="/drainage" component={Drainage} />
-    <Route path="/counties" component={Counties} /> */}
+    <Route path="/counties" component={Counties} />
   </Switch>
 );
 

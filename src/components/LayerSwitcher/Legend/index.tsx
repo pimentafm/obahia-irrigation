@@ -14,7 +14,7 @@ interface LegendProps {
 
 const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
   const { t } = useTranslation();
-  
+
   const [legendHTML, setlegendHTML] = useState([]);
 
   useEffect(() => {
@@ -25,15 +25,9 @@ const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
       .then(res => {
         let html = res.data;
 
-        html = html.replace('Formações florestais', t('label_forest'))
-                   .replace('Formações savânicas', t('label_savanna'))
-                   .replace('Formações campestres', t('label_grasslands'))
-                   .replace('Mosaico de agricultura ou pastagem', t('label_mosaic'))
-                   .replace('Agricultura de sequeiro', t('label_rainfed'))
-                   .replace('Agricultura irrigada', t('label_irrigated'))
-                   .replace('Pastagem', t('label_pasture'))
-                   .replace(`Corpos d'água`, t('label_water'))
-                   .replace('Área urbana/Construções rurais', t('label_urban'));
+        html = html
+          .replace('Irrigado', t('label_irrigated'))
+          .replace('Não irrigado', t('label_notirrigated'));
 
         html = ReactHtmlParser(html);
 
