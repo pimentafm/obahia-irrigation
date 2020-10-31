@@ -25,17 +25,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const [popclass, setPopClass] = useState<string>();
   const [popvalue, setPopValue] = useState<string>();
 
-  let luclasses = [
-    t('label_forest'),
-    t('label_savanna'),
-    t('label_grasslands'),
-    t('label_mosaic'),
-    t('label_rainfed'),
-    t('label_irrigated'),
-    t('label_pasture'),
-    t('label_water'),
-    t('label_urban'),
-  ];
+  let luclasses = [t('label_irrigated'), t('label_notirrigated')];
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -143,13 +133,13 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_popup_class')}</td>
           <td id="popup-lulc" style={{ padding: `2px 5px` }}>
-            {popclass ? popclass : 'Fora da camada'}
+            {popclass ? popclass : t('popup_clickout')}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_popup_code')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {popvalue ? popvalue : 'Fora da camada'}
+            {popvalue ? popvalue : t('popup_clickout')}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
