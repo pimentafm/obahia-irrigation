@@ -25,12 +25,17 @@ import Popup from '../../components/Popup';
 
 interface MapProps {
   defaultYear: number;
+  defaultMonth: number;
   defaultCategory: string;
 }
 
-const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [landuse] = useState(
-    new TileLayer({ visible: true, className: 'landuse-layer' }),
+const Map: React.FC<MapProps> = ({
+  defaultYear,
+  defaultMonth,
+  defaultCategory,
+}) => {
+  const [irrigation] = useState(
+    new TileLayer({ visible: true, className: 'irrigation-layer' }),
   );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
@@ -38,6 +43,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [counties] = useState(new TileLayer({ visible: false }));
 
   const [year, setYear] = useState(defaultYear);
+  const [month, setMonth] = useState(defaultMonth);
 
   const [center] = useState([-45.2471, -12.4818]);
   const [zoom] = useState<number>(7);
@@ -59,7 +65,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse, watersheds, counties, highways, hidrography],
+      layers: [osm, irrigation, watersheds, counties, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -107,11 +113,12 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     crossOrigin: 'anonymous',
   });
 
-  const landuse_source = new TileWMS({
-    url: wms.defaults.baseURL + 'landuseRegion.map',
+  const irrigation_source = new TileWMS({
+    url: wms.defaults.baseURL + 'irrigationRegion.map',
     params: {
       year: year,
-      LAYERS: 'landuse',
+      month: month,
+      LAYERS: 'irrigation',
       TILED: true,
     },
     serverType: 'mapserver',
@@ -134,15 +141,22 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
 
-  landuse.set('name', 'landuse');
-  landuse.setSource(landuse_source);
-  landuse.getSource().refresh();
+  irrigation.set('name', 'irrigation');
+  irrigation.setSource(irrigation_source);
+  irrigation.getSource().refresh();
 
   const handleYear = useCallback(
     y => {
       setYear(y);
     },
     [setYear],
+  );
+
+  const handleMonth = useCallback(
+    m => {
+      setMonth(m);
+    },
+    [setMonth],
   );
 
   useEffect(() => {
@@ -155,11 +169,13 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
         ishidden={window.innerWidth <= 760 ? 1 : 0}
         defaultCategory={defaultCategory}
         defaultYear={year}
+        defaultMonth={month}
         handleYear={handleYear}
+        handleMonth={handleMonth}
         map={map}
       />
 
-      <Popup map={map} source={landuse_source} />
+      <Popup map={map} source={irrigation_source} />
 
       {/* <CardPlot year={year} ishidden={window.innerWidth <= 760 ? 1 : 0} /> */}
 

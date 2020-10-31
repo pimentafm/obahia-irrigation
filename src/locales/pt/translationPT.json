@@ -12,7 +12,7 @@
   "select_watershed": "Bacia hidrográfica",
   "select_drainage": "Área de Drenagem",
   "select_municipal": "Municipal",
-  "label_landuse": "Cobertura e uso do solo",
+  "label_irrigation": "Cobertura e uso do solo",
   "label_hidrography": "Hidrografia",
   "label_highways": "Rodovias",
   "label_watersheds": "Bacias hidrográficas",
@@ -28,6 +28,7 @@
   "toolsmenu_mapserver": "Servidor de Mapas",
   "toolsmenu_maps": "Série Temporal de Mapas",
   "toolsmenu_landuse": "Series Temporais de Cobertura e Uso do Solo",
+  "toolsmenu_irrigation": "Séries Temporais das áreas irrigadas",
   "toolsmenu_biomass": "Series Temporais de Estoque de Carbono",
   "toolsmenu_onset": "Previsão do Início da Estação Chuvosa",
   "toolsmenu_mfview": "Visualizador do Modelo de Fluxo de Águas Subterrâneas",
@@ -69,7 +70,7 @@
   "label_pasture": "Pastagem",
   "label_water": "Corpos d'água",
   "label_urban": "Área urbana/Construções rurais",
-  "label_landuse_classes": [
+  "label_irrigation_classes": [
     "Formações florestais",
     "Formações savânicas",
     "Formações campestres",

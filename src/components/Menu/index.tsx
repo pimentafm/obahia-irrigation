@@ -43,9 +43,11 @@ interface MenuProps {
   defaultCodeName?: CodeNameData;
   defaultWatershed?: string;
   defaultYear: number;
+  defaultMonth: number;
   handleWatershed?(year: string): void;
   handleCodeName?(codename: string): void;
   handleYear(year: number): void;
+  handleMonth(month: number): void;
   map: OlMap;
 }
 
@@ -57,9 +59,11 @@ const Menu: React.FC<MenuProps> = ({
   defaultCodeName,
   defaultWatershed,
   defaultYear,
+  defaultMonth,
   handleCodeName,
   handleWatershed,
   handleYear,
+  handleMonth,
   map,
   ...rest
 }) => {
@@ -157,9 +161,16 @@ const Menu: React.FC<MenuProps> = ({
     [map],
   );
 
-  const handleDate = useCallback((date, dateString) => {
-    console.log(dateString);
-  }, []);
+  const handleDate = useCallback(
+    (_, dateString) => {
+      const year = parseInt(dateString.split('-')[0]);
+      const month = parseInt(dateString.split('-')[1]) - 1;
+
+      handleYear(year);
+      handleMonth(month);
+    },
+    [handleYear, handleMonth],
+  );
 
   let watershedsLabel = null;
   let watershedSelect = null;
@@ -232,22 +243,22 @@ const Menu: React.FC<MenuProps> = ({
     switch (category) {
       case 'regional':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/region/landuse${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/region/irrigation${defaultYear}.tif`,
         );
         break;
       case 'gcc':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/gcc/${defaultWatershed?.toLowerCase()}/landuse${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/gcc/${defaultWatershed?.toLowerCase()}/irrigation${defaultYear}.tif`,
         );
         break;
       case 'drainage':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/drainage/${defaultCodeName?.code}/landuse_${defaultCodeName?.code}_${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/drainage/${defaultCodeName?.code}/irrigation_${defaultCodeName?.code}_${defaultYear}.tif`,
         );
         break;
       case 'counties':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/counties/landuse_${defaultCodeName?.code}_${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/irrigation/counties/irrigation_${defaultCodeName?.code}_${defaultYear}.tif`,
         );
         break;
     }
@@ -261,6 +272,7 @@ const Menu: React.FC<MenuProps> = ({
   }, [
     category,
     defaultYear,
+    defaultMonth,
     defaultCategory,
     defaultWatershed,
     defaultCodeName,
@@ -346,8 +358,8 @@ const Menu: React.FC<MenuProps> = ({
         />
 
         <LayerSwitcher
-          name="landuse"
-          label={t('label_landuse')}
+          name="irrigation"
+          label={t('label_irrigation')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
