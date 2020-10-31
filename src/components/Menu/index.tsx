@@ -349,6 +349,7 @@ const Menu: React.FC<MenuProps> = ({
 
         <label>{t('label_date')}</label>
         <MonthPicker
+          allowClear={false}
           disabledDate={d => d.isBefore('2001-01') || d.isAfter('2019-12')}
           defaultPickerValue={moment('2019-12', 'YYYY-MM')}
           defaultValue={moment('2019-12', 'YYYY-MM')}
