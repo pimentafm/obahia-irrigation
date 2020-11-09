@@ -62,18 +62,5 @@
   "barplot_title_counties": "Cobertura e Uso do Solo no município de",
   "barplot_link_counties": "em",
   "label_irrigated": "Irrigado",
-  "label_notirrigated": "Não irrigado",
-  "label_water": "Corpos d'água",
-  "label_urban": "Área urbana/Construções rurais",
-  "label_irrigation_classes": [
-    "Formações florestais",
-    "Formações savânicas",
-    "Formações campestres",
-    "Mosaico de agricultura ou pastagem",
-    "Agricultura de sequeiro",
-    "Agricultura irrigada",
-    "Pastagem",
-    "Corpos d'água",
-    "Área urbana/Construções rurais"
-  ]
+  "label_notirrigated": "Não irrigado"
 }

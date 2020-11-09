@@ -1,8 +1,7 @@
 {
-  "name": "Rainfed Crop Time Series",
-  "short_name": "Rainfed Crop Time Series",
-  "icons": [
-    {
+  "name": "Irrigated Crop Time Series",
+  "short_name": "Irrigated Crop Time Series",
+  "icons": [{
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
