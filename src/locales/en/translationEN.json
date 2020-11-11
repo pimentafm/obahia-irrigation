@@ -62,5 +62,6 @@
   "barplot_title_counties": "Irrigated Crop in",
   "barplot_link_counties": "municipality in",
   "label_irrigated": "Irrigated",
-  "label_notirrigated": "Not irrigated"
+  "label_notirrigated": "Not irrigated",
+  "label_otheruses": "Other uses"
 }

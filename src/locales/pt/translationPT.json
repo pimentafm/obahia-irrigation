@@ -62,5 +62,6 @@
   "barplot_title_counties": "Cobertura e Uso do Solo no município de",
   "barplot_link_counties": "em",
   "label_irrigated": "Irrigado",
-  "label_notirrigated": "Não irrigado"
+  "label_notirrigated": "Não irrigado",
+  "label_otheruses": "Outros usos"
 }

@@ -25,7 +25,11 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const [popclass, setPopClass] = useState<string>();
   const [popvalue, setPopValue] = useState<string>();
 
-  let luclasses = [t('label_irrigated'), t('label_notirrigated')];
+  let luclasses = [
+    t('label_otheruses'),
+    t('label_irrigated'),
+    t('label_notirrigated'),
+  ];
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -43,7 +47,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         })
         .then(value => {
           setPopCoords(coordinate);
-          setPopClass(luclasses[parseInt(value) - 1]);
+          setPopClass(luclasses[parseInt(value)]);
           setPopValue(value);
         });
     },
@@ -150,7 +154,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             id="popup-coords"
             style={{ padding: `2px 5px`, borderRadius: `0px 0px 2px 0px` }}
           >
-            {popcoords ? popcoords : 'Clique no mapa'}
+            {popcoords ? popcoords : t('popup_clickout')}
           </td>
         </tr>
       </tbody>
