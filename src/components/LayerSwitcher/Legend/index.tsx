@@ -27,7 +27,8 @@ const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
 
         html = html
           .replace('Irrigado', t('label_irrigated'))
-          .replace('Não irrigado', t('label_notirrigated'));
+          .replace('Não irrigado', t('label_notirrigated'))
+          .replace('Outros usos', t('label_otheruses'));
 
         html = ReactHtmlParser(html);
 
