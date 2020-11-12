@@ -482,6 +482,19 @@ const Menu: React.FC<MenuProps> = ({
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
+
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_ref01')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.mdpi.com/2072-4292/12/22/3725"
+          >
+            {' '}
+            https://doi.org/10.3390/rs12223725
+          </a>
+        </p>
 
         {/* <img
           width="100%"
