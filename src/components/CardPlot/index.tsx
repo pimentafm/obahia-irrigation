@@ -43,8 +43,6 @@ const CardPlot: React.FC<CardProps> = ({ year, ishidden }) => {
       <Content>
         <label>{t('timeseriesplot_title')}</label>
         <TimeSeriePlot tableName="landuse" />
-
-        <div className="final-space"></div>
       </Content>
     </Container>
   );

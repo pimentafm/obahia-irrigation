@@ -16,7 +16,7 @@ export const Container = styled.div<ContainerProps>`
   bottom: 30px;
   z-index: 2;
 
-  transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
+  transform: translateX(${({ ishidden }) => (ishidden ? 100 : 0)}vw);
   transition: 0.3s;
 
   label {
