@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
 
-import { oba } from '../../../services';
+import axios from 'axios';
 
 import { useTranslation } from 'react-i18next';
 
 interface TimeSeriePlotData {
-  forest: Object;
-  savanna: Object;
-  grass: Object;
-  croppast: Object;
-  raincrop: Object;
-  irrcrop: Object;
-  past: Object;
-  water: Object;
-  urban: Object;
+  totalarea: Object;
+  totalflow: Object;
+  totalamount: Object;
+  datestring: Object;
 }
 
 interface TimeSeriePlotProps {
@@ -24,40 +19,28 @@ interface TimeSeriePlotProps {
 const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
   const { t } = useTranslation();
 
-  const [forest, setForest] = useState(null);
-  const [savanna, setSavanna] = useState(null);
-  const [grass, setGrass] = useState(null);
-  const [croppast, setCroppast] = useState(null);
-  const [raincrop, setRaincrop] = useState(null);
-  const [irrcrop, setIrrcrop] = useState(null);
-  const [past, setPast] = useState(null);
-  const [water, setWater] = useState(null);
-  const [urban, setUrban] = useState(null);
-
-  const [xaxis] = useState(
-    Array.from(new Array(31), (_, index) => index + 1990),
-  );
+  const [totalarea, setTotalArea] = useState(null);
+  const [totalamount, setTotalAmount] = useState(null);
+  const [totalflow, setTotalFlow] = useState(null);
+  const [datestring, setDateString] = useState(null);
 
   useEffect(() => {
-    oba
-      .post('region/', {
-        year1: 1990,
-        year2: 2020,
-        table_name: tableName,
+    axios
+      .post('http://localhost:8000/irrigation/', {
+        table_name: 'irrigation',
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(response => {
-        setForest(response.data.map((j: TimeSeriePlotData) => j.forest));
-        setSavanna(response.data.map((j: TimeSeriePlotData) => j.savanna));
-        setGrass(response.data.map((j: TimeSeriePlotData) => j.grass));
-        setCroppast(response.data.map((j: TimeSeriePlotData) => j.croppast));
-        setRaincrop(response.data.map((j: TimeSeriePlotData) => j.raincrop));
-        setIrrcrop(response.data.map((j: TimeSeriePlotData) => j.irrcrop));
-        setPast(response.data.map((j: TimeSeriePlotData) => j.past));
-        setWater(response.data.map((j: TimeSeriePlotData) => j.water));
-        setUrban(response.data.map((j: TimeSeriePlotData) => j.urban));
+        setTotalArea(response.data.map((j: TimeSeriePlotData) => j.totalarea));
+        setTotalFlow(response.data.map((j: TimeSeriePlotData) => j.totalflow));
+        setTotalAmount(
+          response.data.map((j: TimeSeriePlotData) => j.totalamount),
+        );
+        setDateString(
+          response.data.map((j: TimeSeriePlotData) => j.datestring),
+        );
       })
       .catch(e => {
         throw new Error('Do not load TimeSeriePlot data');
@@ -66,85 +49,28 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
 
   const data = [
     {
-      x: xaxis,
-      y: urban,
-      stackgroup: 'one',
-      fillcolor: '#ff0000',
+      x: datestring,
+      y: totalarea,
       type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#ff0000' },
+      name: 'Area',
+      hovertemplate: '%{y:.2f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
+      line: { color: '#016513' },
     },
     {
-      x: xaxis,
-      y: water,
-      stackgroup: 'one',
-      fillcolor: '#0000ff',
+      x: datestring,
+      y: totalamount,
       type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
+      name: 'Amount',
+      hovertemplate: '%{y:.2f} x 10<sup>3</sup> mm<extra></extra>',
       line: { color: '#0000ff' },
     },
     {
-      x: xaxis,
-      y: past,
-      stackgroup: 'one',
-      fillcolor: '#f4f286',
+      x: datestring,
+      y: totalflow,
       type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#f4f286' },
-    },
-    {
-      x: xaxis,
-      y: irrcrop,
-      stackgroup: 'one',
-      fillcolor: '#ff42f9',
-      type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#ff42f9' },
-    },
-    {
-      x: xaxis,
-      y: raincrop,
-      stackgroup: 'one',
-      fillcolor: '#ffcaff',
-      type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#ffcaff' },
-    },
-    {
-      x: xaxis,
-      y: croppast,
-      stackgroup: 'one',
-      fillcolor: '#f6e6db',
-      type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#f6e6db' },
-    },
-    {
-      x: xaxis,
-      y: grass,
-      stackgroup: 'one',
-      fillcolor: '#b8af4f',
-      type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#b8af4f' },
-    },
-    {
-      x: xaxis,
-      y: savanna,
-      stackgroup: 'one',
-      fillcolor: '#77a605',
-      type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#77a605' },
-    },
-    {
-      x: xaxis,
-      y: forest,
-      stackgroup: 'one',
-      fillcolor: '#004000',
-      type: 'scatter',
-      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#004000' },
+      name: 'Flow',
+      hovertemplate: '%{y:.2f} x 10<sup>3</sup> m<sup>3</sup>/s<extra></extra>',
+      line: { color: '#6495ed' },
     },
   ];
   const layout = {
@@ -154,25 +80,26 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
         size: 14,
       },
     },
-    height: 300,
     xaxis: {
-      titlefont: {
-        family: 'Arial, sans-serif',
-        size: 12,
-        color: '#000',
+      rangeselector: {
+        buttons: [
+          {
+            count: 1,
+            label: '1m',
+            step: 'month',
+            stepmode: 'backward',
+          },
+          {
+            count: 6,
+            label: '6m',
+            step: 'month',
+            stepmode: 'backward',
+          },
+          { step: 'all' },
+        ],
       },
-      tickfont: {
-        family: 'Arial, sans-serif',
-        size: 12,
-        color: 'black',
-      },
-      autotick: false,
-      ticks: 'outside',
-      tick0: 1990,
-      dtick: 4,
-      ticklen: 6,
-      tickwidth: 1,
-      tickcolor: '#000',
+      rangeslider: { range: ['2001-01-15', '2019-12-15'] },
+      type: 'date',
     },
     yaxis: {
       title: {
@@ -188,22 +115,11 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
         size: 12,
         color: 'black',
       },
-
-      autotick: false,
-      ticks: 'outside',
-      tick0: 0,
-      dtick: 20,
-      ticklen: 6,
-      tickwidth: 1,
-      tickcolor: '#000',
     },
-    showlegend: false,
-    hovermode: 'x unified',
     margin: { l: 60, r: 10, t: 10, b: 30 },
     transition: {
       duration: 1000,
-      easing: 'quad-in-out',
-      ordering: 'traces first',
+      easing: 'cubic-in-out',
     },
   };
 
