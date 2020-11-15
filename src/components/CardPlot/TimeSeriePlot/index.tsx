@@ -33,6 +33,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
         },
       })
       .then(response => {
+        console.log(response.data);
         setTotalArea(response.data.map((j: TimeSeriePlotData) => j.totalarea));
         setTotalFlow(response.data.map((j: TimeSeriePlotData) => j.totalflow));
         setTotalAmount(
@@ -53,24 +54,27 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       y: totalarea,
       type: 'scatter',
       name: 'Area',
+      yaxis: 'y1',
       hovertemplate: '%{y:.2f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#016513' },
+      line: { color: '#016513', shape: 'hv' },
     },
     {
       x: datestring,
       y: totalamount,
       type: 'scatter',
       name: 'Amount',
+      yaxis: 'y2',
       hovertemplate: '%{y:.2f} x 10<sup>3</sup> mm<extra></extra>',
-      line: { color: '#0000ff' },
+      line: { color: '#0000ff', shape: 'hv' },
     },
     {
       x: datestring,
       y: totalflow,
       type: 'scatter',
       name: 'Flow',
+      yaxis: 'y3',
       hovertemplate: '%{y:.2f} x 10<sup>3</sup> m<sup>3</sup>/s<extra></extra>',
-      line: { color: '#6495ed' },
+      line: { color: '#6495ed', shape: 'hv' },
     },
   ];
   const layout = {
@@ -81,6 +85,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       },
     },
     xaxis: {
+      domain: ['2018-01-15', '2019-12-15'],
       rangeselector: {
         buttons: [
           {
@@ -102,19 +107,27 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       type: 'date',
     },
     yaxis: {
-      title: {
-        text: t('label_plot_yaxis'),
-      },
-      titlefont: {
-        family: 'Arial, sans-serif',
-        size: 12,
-        color: '#000',
-      },
-      tickfont: {
-        family: 'Arial, sans-serif',
-        size: 12,
-        color: 'black',
-      },
+      title: 'Area (ha)',
+      titlefont: { color: '#016513' },
+      tickfont: { color: '#016513' },
+    },
+    yaxis2: {
+      title: 'Amount (mm)',
+      titlefont: { color: '#0000ff' },
+      tickfont: { color: '#0000ff' },
+      anchor: 'free',
+      overlaying: 'y',
+      side: 'left',
+      position: 0.08,
+    },
+    yaxis3: {
+      title: 'Flow (m³/s)',
+      titlefont: { color: '#0064ff' },
+      tickfont: { color: '#0064ff' },
+      anchor: 'free',
+      overlaying: 'y',
+      side: 'left',
+      position: 0.16,
     },
     margin: { l: 60, r: 10, t: 10, b: 30 },
     transition: {
