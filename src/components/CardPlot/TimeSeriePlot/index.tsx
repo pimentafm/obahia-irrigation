@@ -56,7 +56,8 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       name: 'Area',
       yaxis: 'y1',
       hovertemplate: '%{y:.2f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
-      line: { color: '#016513', shape: 'hv' },
+      line: { color: '#016513', shape: 'hvh' },
+      mode: 'lines+markers',
     },
     {
       x: datestring,
@@ -65,7 +66,8 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       name: 'Amount',
       yaxis: 'y2',
       hovertemplate: '%{y:.2f} x 10<sup>3</sup> mm<extra></extra>',
-      line: { color: '#0000ff', shape: 'hv' },
+      line: { color: '#0000ff', shape: 'hvh' },
+      mode: 'lines+markers',
     },
     {
       x: datestring,
@@ -74,7 +76,8 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       name: 'Flow',
       yaxis: 'y3',
       hovertemplate: '%{y:.2f} x 10<sup>3</sup> m<sup>3</sup>/s<extra></extra>',
-      line: { color: '#6495ed', shape: 'hv' },
+      line: { color: '#6495ed', shape: 'hvh' },
+      mode: 'lines+markers',
     },
   ];
   const layout = {
