@@ -36,6 +36,7 @@ export const Container = styled.div<ContainerProps>`
 
     svg {
       cursor: pointer;
+      transform: rotate(${({ ishidden }) => (ishidden ? 180 : 0)}deg);
       margin-top: 10px;
       border-radius: 2px;
       background: #fff;

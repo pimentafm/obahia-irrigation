@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 
 import { Popover } from 'antd';
 
-import { FiMenu } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 
 import { Container, Content } from './styles';
 
@@ -32,7 +32,7 @@ const CardPlot: React.FC<CardProps> = ({ year, ishidden }) => {
     <Container id="cardplot" ishidden={hidden}>
       <div id="handleCardplot">
         <Popover placement="leftTop" content={t('tooltip_menu_plot')}>
-          <FiMenu
+          <FiChevronRight
             type="menu"
             style={{ fontSize: '20px', color: '#000' }}
             onClick={handleCardPlot}
