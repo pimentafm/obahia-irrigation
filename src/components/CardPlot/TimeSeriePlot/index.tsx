@@ -21,7 +21,6 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
   const { t } = useTranslation();
 
   const [totalamount, setTotalAmount] = useState(null);
-  const [totalvolume, setTotalVolume] = useState(null);
   const [totalflow, setTotalFlow] = useState(null);
   const [totalarea, setTotalArea] = useState(null);
   const [datestring, setDateString] = useState(null);
@@ -37,9 +36,6 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       .then(response => {
         setTotalAmount(
           response.data.map((j: TimeSeriePlotData) => j.totalamount),
-        );
-        setTotalVolume(
-          response.data.map((j: TimeSeriePlotData) => j.totalvolume),
         );
         setTotalFlow(response.data.map((j: TimeSeriePlotData) => j.totalflow));
         setTotalArea(response.data.map((j: TimeSeriePlotData) => j.totalarea));
@@ -57,7 +53,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       x: datestring,
       y: totalamount,
       type: 'scatter',
-      name: 'Amount',
+      name: 'Amount (mm)',
       yaxis: 'y1',
       hovertemplate: '%{y:.2f}</sup> mm<extra></extra>',
       line: { color: '#0000ff', shape: 'hvh' },
@@ -65,30 +61,20 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
     },
     {
       x: datestring,
-      y: totalvolume,
-      type: 'scatter',
-      name: 'Volume',
-      yaxis: 'y2',
-      hovertemplate: '%{y:.2f}</sup> litres<extra></extra>',
-      line: { color: '#f76707', shape: 'hvh' },
-      mode: 'lines+markers',
-    },
-    {
-      x: datestring,
       y: totalflow,
       type: 'scatter',
-      name: 'Flow',
-      yaxis: 'y3',
+      name: 'Flow (m³/s)',
+      yaxis: 'y2',
       hovertemplate: '%{y:.2f}</sup> m<sup>3</sup>/s<extra></extra>',
-      line: { color: '#6495ed', shape: 'hvh' },
+      line: { color: '#f76707', shape: 'hvh' },
       mode: 'lines+markers',
     },
     {
       x: datestring,
       y: totalarea,
       type: 'scatter',
-      name: 'Area',
-      yaxis: 'y4',
+      name: 'Area (ha)',
+      yaxis: 'y3',
       hovertemplate: '%{y:.2f} ha<extra></extra>',
       line: { color: '#016513', shape: 'hvh' },
       mode: 'lines+markers',
@@ -124,36 +110,27 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       type: 'date',
     },
     yaxis: {
-      title: 'Amount (mm)',
-      titlefont: { color: '#016513' },
-      tickfont: { color: '#016513' },
+      //title: 'Amount (ha)',
+      titlefont: { color: '#030188' },
+      tickfont: { color: '#030188' },
     },
     yaxis2: {
-      title: 'Volume (litres)',
+      //title: 'Flow (m³/s)',
       titlefont: { color: '#f76707' },
       tickfont: { color: '#f76707' },
       anchor: 'free',
       overlaying: 'y',
       side: 'left',
-      position: 0.05,
+      position: 0.02,
     },
     yaxis3: {
-      title: 'Flow (m³/s)',
-      titlefont: { color: '#0064ff' },
-      tickfont: { color: '#0064ff' },
+      //title: 'Area (mm)',
+      titlefont: { color: '#016513' },
+      tickfont: { color: '#016513' },
       anchor: 'free',
       overlaying: 'y',
       side: 'left',
-      position: 0.1,
-    },
-    yaxis4: {
-      title: 'Area (ha)',
-      titlefont: { color: '#030188' },
-      tickfont: { color: '#030188' },
-      anchor: 'free',
-      overlaying: 'y',
-      side: 'left',
-      position: 0.15,
+      position: 0.04,
     },
     margin: { l: 60, r: 10, t: 10, b: 30 },
     transition: {
