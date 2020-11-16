@@ -87,6 +87,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
         size: 14,
       },
     },
+    height: 400,
     xaxis: {
       domain: ['2018-01-15', '2019-12-15'],
       rangeselector: {
