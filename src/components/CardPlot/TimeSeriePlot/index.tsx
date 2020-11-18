@@ -13,7 +13,12 @@ interface TimeSeriePlotData {
   datestring: Object;
 }
 
-const TimeSeriePlot: React.FC = () => {
+interface TimeSeriePlotProps {
+  year: number;
+  code: number;
+}
+
+const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ year, code }) => {
   //const { t } = useTranslation();
 
   const [totalamount, setTotalAmount] = useState(null);
@@ -23,8 +28,9 @@ const TimeSeriePlot: React.FC = () => {
 
   useEffect(() => {
     local
-      .post('irrigationstats/', {
-        table_name: 'irrigation',
+      .post('irrigationdrainstats/', {
+        year: year,
+        code: 46550000,
         headers: {
           'Content-type': 'application/json',
         },
@@ -42,7 +48,7 @@ const TimeSeriePlot: React.FC = () => {
       .catch(e => {
         throw new Error('Do not load TimeSeriePlot data');
       });
-  }, []);
+  }, [year]);
 
   const data = [
     {
