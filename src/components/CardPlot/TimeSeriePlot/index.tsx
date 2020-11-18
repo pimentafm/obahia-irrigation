@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
 
-import axios from 'axios';
+import { local } from '../../../services';
 
 import { useTranslation } from 'react-i18next';
 
@@ -13,12 +13,8 @@ interface TimeSeriePlotData {
   datestring: Object;
 }
 
-interface TimeSeriePlotProps {
-  tableName: string;
-}
-
-const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
-  const { t } = useTranslation();
+const TimeSeriePlot: React.FC = () => {
+  //const { t } = useTranslation();
 
   const [totalamount, setTotalAmount] = useState(null);
   const [totalflow, setTotalFlow] = useState(null);
@@ -26,8 +22,8 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
   const [datestring, setDateString] = useState(null);
 
   useEffect(() => {
-    axios
-      .post('http://localhost:8000/irrigation/', {
+    local
+      .post('irrigationstats/', {
         table_name: 'irrigation',
         headers: {
           'Content-type': 'application/json',
@@ -46,7 +42,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ tableName }) => {
       .catch(e => {
         throw new Error('Do not load TimeSeriePlot data');
       });
-  }, [tableName, t]);
+  }, []);
 
   const data = [
     {
