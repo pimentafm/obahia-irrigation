@@ -19,7 +19,7 @@ import { Container } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-import CardPlot from '../CardPlot';
+import CardPlotDrainage from '../CardPlotDrainage';
 
 import Popup from '../../components/Popup';
 
@@ -209,7 +209,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={irrigation_source} />
 
-      <CardPlot
+      <CardPlotDrainage
         code={codeName.code}
         ishidden={window.innerWidth <= 760 ? 1 : 0}
       />
