@@ -210,8 +210,7 @@ const Map: React.FC<MapProps> = ({
       <Popup map={map} source={irrigation_source} />
 
       <CardPlot
-        year={year}
-        code={defaultCodeName.code}
+        code={codeName.code}
         ishidden={window.innerWidth <= 760 ? 1 : 0}
       />
 

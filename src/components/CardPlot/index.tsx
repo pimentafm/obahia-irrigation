@@ -12,11 +12,10 @@ import { useTranslation } from 'react-i18next';
 
 interface CardProps {
   ishidden: number;
-  year: number;
   code: number;
 }
 
-const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
+const CardPlot: React.FC<CardProps> = ({ code, ishidden }) => {
   const { t } = useTranslation();
 
   const [hidden, setHidden] = useState(ishidden);
@@ -45,7 +44,7 @@ const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
         <label>
           {t('timeseriesplot_title')} - {code}
         </label>
-        <TimeSeriePlot year={year} code={code} />
+        <TimeSeriePlot code={code} />
       </Content>
     </Container>
   );
