@@ -19,7 +19,7 @@ import { Container } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-// import CardPlot from '../CardPlotCounty';
+import CardPlot from '../CardPlotCounty';
 
 import Popup from '../../components/Popup';
 
@@ -194,12 +194,11 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={irrigation_source} />
 
-      {/* <CardPlot
-        year={year}
+      <CardPlot
         code={codeName.code}
-        name={codeName.name}
+        //name={codeName.name}
         ishidden={window.innerWidth <= 760 ? 1 : 0}
-      /> */}
+      />
 
       <Footer id="footer" map={map} />
     </Container>
