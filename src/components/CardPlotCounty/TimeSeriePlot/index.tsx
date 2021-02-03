@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
 
-import { local } from '../../../services';
+import { oba } from '../../../services';
 
 //import { useTranslation } from 'react-i18next';
 
@@ -26,7 +26,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
   const [datestring, setDateString] = useState(null);
 
   useEffect(() => {
-    local
+    oba
       .post('irrigationcountiesstats/', {
         code: code,
         headers: {
