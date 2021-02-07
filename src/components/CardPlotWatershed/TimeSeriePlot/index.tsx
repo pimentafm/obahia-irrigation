@@ -3,7 +3,7 @@ import PlotlyChart from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
-//import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 interface TimeSeriePlotData {
   totalamount: Object;
@@ -18,7 +18,7 @@ interface TimeSeriePlotProps {
 }
 
 const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
-  //const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const [totalamount, setTotalAmount] = useState(null);
   const [totalflow, setTotalFlow] = useState(null);
@@ -53,9 +53,9 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       x: datestring,
       y: totalamount,
       type: 'scatter',
-      name: 'Amount (mm)',
+      name: t('label_amount'),
       yaxis: 'y1',
-      hovertemplate: '%{y:.2f}</sup> mm<extra></extra>',
+      hovertemplate: '%{y:.2f}</sup> ' + t('label_amount') + ' <extra></extra>',
       line: { color: '#0000ff', shape: 'hvh' },
       mode: 'lines+markers',
     },
@@ -63,7 +63,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       x: datestring,
       y: totalflow,
       type: 'scatter',
-      name: 'Flow (m³/s)',
+      name: t('label_flow'),
       yaxis: 'y2',
       hovertemplate: '%{y:.2f}</sup> m<sup>3</sup>/s<extra></extra>',
       line: { color: '#f76707', shape: 'hvh' },
@@ -73,7 +73,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       x: datestring,
       y: totalarea,
       type: 'scatter',
-      name: 'Area (ha)',
+      name: t('label_area'),
       yaxis: 'y3',
       hovertemplate: '%{y:.2f} ha<extra></extra>',
       line: { color: '#016513', shape: 'hvh' },

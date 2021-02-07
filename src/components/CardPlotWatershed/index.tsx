@@ -42,7 +42,8 @@ const CardPlot: React.FC<CardProps> = ({ watershed, ishidden }) => {
 
       <Content>
         <label>
-          {t('timeseriesplot_title')} - {watershed}
+          {t('timeseriesplot_title')} -{' '}
+          {watershed[0].toUpperCase() + watershed.substring(1)}
         </label>
         <TimeSeriePlot watershed={watershed} />
       </Content>
