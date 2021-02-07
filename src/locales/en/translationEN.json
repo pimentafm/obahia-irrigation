@@ -1,7 +1,7 @@
 {
   "appname": "Irrigated Crop Time series",
   "description_title": "Description:",
-  "description_content": "This tool allows the customized visualization and analyze Western Bahia Irrigated Crop Time series at regional, basin, drainage areas and at municipal level. Methodology details are available in",
+  "description_content": "This tool allows the customized visualization and analysis of Western Bahia Irrigated Crop Time series (actual irrigated area, irrigation depth and water uptake for irrigation) at the regional, basin, drainage areas and municipal levels. Methodology details are available in",
   "description_terms": "The use of this information implies acceptance of the disclaimer specified in",
   "label_level": "Level",
   "label_date": "Date",

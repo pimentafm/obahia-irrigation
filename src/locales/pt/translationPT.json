@@ -1,7 +1,7 @@
 {
   "appname": "Séries Temporais de Agricultura Irrigada",
   "description_title": "Descrição:",
-  "description_content": "Esta ferramenta permite a visualização e análise customizada das séries temporais de agricultura irrigada, a nível regional, de bacia, de áreas de drenagem e a nível municipal para a região do Oeste da Bahia. Maiores informações sobre os dados de agricultura irrigada podem ser acessados em",
+  "description_content": "Esta ferramenta permite a visualização e análise customizada das séries temporais de agricultura irrigada (lâmina irrigada, vazão de irrigação e área efetivamente irrigada), a nível regional, de bacia, de áreas de drenagem e a nível municipal para a região do Oeste da Bahia. Maiores informações sobre os dados de agricultura irrigada podem ser acessados em",
   "description_terms": "O uso dessas informações implica no aceite da exoneração de responsabilidade especificada em",
   "label_level": "Nível",
   "label_date": "Data",
