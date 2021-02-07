@@ -8,7 +8,7 @@ const Counties: React.FC = () => {
       defaultYear={2019}
       defaultMonth={11}
       defaultCategory="counties"
-      defaultCodeName={{ code: 2903201, name: 'BARREIRAS - 2903201' }}
+      defaultCodeName={{ code: 2903201, name: 'BARREIRAS' }}
     />
   );
 };

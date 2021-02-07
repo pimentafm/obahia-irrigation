@@ -146,7 +146,7 @@ const Map: React.FC<MapProps> = ({
     codename => {
       const code = parseInt(codename.split(' - ')[1]);
 
-      setCodeName({ code: code, name: codename });
+      setCodeName({ code: code, name: codename.split(' - ')[0] });
 
       oba
         .post('geom/', {
@@ -196,7 +196,7 @@ const Map: React.FC<MapProps> = ({
 
       <CardPlot
         code={codeName.code}
-        //name={codeName.name}
+        name={codeName.name}
         ishidden={window.innerWidth <= 760 ? 1 : 0}
       />
 
