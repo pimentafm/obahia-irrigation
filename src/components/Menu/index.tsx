@@ -350,12 +350,12 @@ const Menu: React.FC<MenuProps> = ({
         <label>{t('label_date')}</label>
         <MonthPicker
           allowClear={false}
-          disabledDate={d => d.isBefore('2001-01') || d.isAfter('2019-12')}
-          defaultPickerValue={moment('2019-12', 'YYYY-MM')}
-          defaultValue={moment('2019-12', 'YYYY-MM')}
+          disabledDate={d => d.isBefore('2001-01') || d.isAfter('2020-12')}
+          defaultPickerValue={moment('2020-12', 'YYYY-MM')}
+          defaultValue={moment('2020-12', 'YYYY-MM')}
           format={'YYYY-MM'}
           onChange={handleDate}
-          placeholder="2019-12"
+          placeholder="2020-12"
         />
 
         <LayerSwitcher

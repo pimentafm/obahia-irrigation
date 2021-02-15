@@ -5,7 +5,7 @@ import Map from '../../components/MapWatershed';
 const Watershed: React.FC = () => {
   return (
     <Map
-      defaultYear={2019}
+      defaultYear={2020}
       defaultMonth={11}
       defaultCategory="gcc"
       defaultWatershed="Grande"

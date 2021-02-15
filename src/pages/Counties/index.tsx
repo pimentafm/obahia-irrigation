@@ -5,7 +5,7 @@ import Map from '../../components/MapCounty';
 const Counties: React.FC = () => {
   return (
     <Map
-      defaultYear={2019}
+      defaultYear={2020}
       defaultMonth={11}
       defaultCategory="counties"
       defaultCodeName={{ code: 2903201, name: 'BARREIRAS' }}
