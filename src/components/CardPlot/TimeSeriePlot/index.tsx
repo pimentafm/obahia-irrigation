@@ -84,7 +84,7 @@ const TimeSeriePlot: React.FC = () => {
     },
     height: 400,
     xaxis: {
-      domain: ['2018-01-15', '2020-12-15'],
+      domain: ['2001-01-15', '2020-12-15'],
       rangeselector: {
         buttons: [
           {

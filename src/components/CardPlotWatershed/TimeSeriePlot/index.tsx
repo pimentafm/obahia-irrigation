@@ -89,12 +89,12 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
     },
     height: 400,
     xaxis: {
-      domain: ['2018-01-15', '2019-12-15'],
+      domain: ['2020-01-15', '2019-12-15'],
       rangeselector: {
         buttons: [
           {
-            count: 1,
-            label: '1m',
+            count: 3,
+            label: '3m',
             step: 'month',
             stepmode: 'backward',
           },
@@ -104,10 +104,16 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
             step: 'month',
             stepmode: 'backward',
           },
+          {
+            count: 12,
+            label: '12m',
+            step: 'month',
+            stepmode: 'backward',
+          },
           { step: 'all' },
         ],
       },
-      rangeslider: { range: ['2001-01-15', '2019-12-15'] },
+      rangeslider: { range: ['2001-01-15', '2020-12-15'] },
       type: 'date',
     },
     yaxis: {
