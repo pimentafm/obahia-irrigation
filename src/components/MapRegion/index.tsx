@@ -35,7 +35,10 @@ const Map: React.FC<MapProps> = ({
   defaultCategory,
 }) => {
   const [irrigation] = useState(
-    new TileLayer({ visible: true, className: 'irrigation-layer' }),
+    new TileLayer({ visible: false, className: 'irrigation-layer' }),
+  );
+  const [evapotranspiration] = useState(
+    new TileLayer({ visible: true, className: 'evapotranspiration-layer' }),
   );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
@@ -65,7 +68,15 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, irrigation, watersheds, counties, highways, hidrography],
+      layers: [
+        osm,
+        irrigation,
+        evapotranspiration,
+        watersheds,
+        counties,
+        highways,
+        hidrography,
+      ],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -125,6 +136,18 @@ const Map: React.FC<MapProps> = ({
     crossOrigin: 'anonymous',
   });
 
+  const evapotranspiration_source = new TileWMS({
+    url: wms.defaults.baseURL + 'evapotranspirationRegion.map',
+    params: {
+      year: year,
+      month: month,
+      LAYERS: 'evapotranspiration',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
   watersheds.set('name', 'watersheds');
   watersheds.setSource(watersheds_source);
   watersheds.getSource().refresh();
@@ -144,6 +167,10 @@ const Map: React.FC<MapProps> = ({
   irrigation.set('name', 'irrigation');
   irrigation.setSource(irrigation_source);
   irrigation.getSource().refresh();
+
+  evapotranspiration.set('name', 'evapotranspiration');
+  evapotranspiration.setSource(evapotranspiration_source);
+  evapotranspiration.getSource().refresh();
 
   const handleYear = useCallback(
     y => {
@@ -175,7 +202,10 @@ const Map: React.FC<MapProps> = ({
         map={map}
       />
 
-      <Popup map={map} source={irrigation_source} />
+      <Popup
+        map={map}
+        source={[irrigation_source, evapotranspiration_source]}
+      />
 
       <CardPlot ishidden={window.innerWidth <= 760 ? 1 : 0} />
 

@@ -359,11 +359,23 @@ const Menu: React.FC<MenuProps> = ({
         />
 
         <LayerSwitcher
+          name="evapotranspiration"
+          label={t('label_evapo')}
+          handleLayerOpacity={handleLayerOpacity}
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={true}
+          legendIsVisible={true}
+          layerInfoIsVisible={true}
+          switchColor="#1f5582"
+          downloadURL={downloadURL}
+        />
+
+        <LayerSwitcher
           name="irrigation"
           label={t('label_irrigation')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={true}
+          layerIsVisible={false}
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"

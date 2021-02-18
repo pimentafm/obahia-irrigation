@@ -25,10 +25,16 @@ const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
       .then(res => {
         let html = res.data;
 
-        html = html
-          .replace('Irrigado', t('label_irrigated'))
-          .replace('Não irrigado', t('label_notirrigated'))
-          .replace('Outros usos', t('label_otheruses'));
+        if (name === 'irrigation') {
+          html = html
+            .replace('Irrigado', t('label_irrigated'))
+            .replace('Não irrigado', t('label_notirrigated'))
+            .replace('Outros usos', t('label_otheruses'));
+        } else {
+          html = html
+            .replace('mm/mo', t('label_evapo_unit'))
+            .replace('Outros usos', t('label_otheruses'));
+        }
 
         html = ReactHtmlParser(html);
 

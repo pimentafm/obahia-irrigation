@@ -189,7 +189,7 @@ const Map: React.FC<MapProps> = ({
         map={map}
       />
 
-      <Popup map={map} source={irrigation_source} />
+      {/* <Popup map={map} source={irrigation_source} /> */}
 
       <CardPlot
         watershed={watershed.toLowerCase()}

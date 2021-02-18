@@ -9,27 +9,22 @@ import { createStringXY } from 'ol/coordinate';
 
 import { FiXCircle } from 'react-icons/fi';
 
-import { Container } from './styles';
+import HtmlParser from 'react-html-parser';
 
 import { useTranslation } from 'react-i18next';
+import { Container } from './styles';
 
 interface PopupProps {
   map: OlMap;
-  source: TileWMS;
+  source: Array<TileWMS>;
 }
 
 const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const { t } = useTranslation();
 
   const [popcoords, setPopCoords] = useState<string>();
-  const [popclass, setPopClass] = useState<string>();
-  const [popvalue, setPopValue] = useState<string>();
-
-  let luclasses = [
-    t('label_otheruses'),
-    t('label_irrigated'),
-    t('label_notirrigated'),
-  ];
+  const [irrigation, setIrrigation] = useState<string>();
+  const [evapotranspiration, setEvapotranspiration] = useState<string>();
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -39,28 +34,27 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     element.style.display = 'none';
   }, []);
 
-  const getData = useCallback(
-    (url, coordinate) => {
-      fetch(url)
-        .then(response => {
-          return response.text();
-        })
-        .then(value => {
-          setPopCoords(coordinate);
-          setPopClass(luclasses[parseInt(value)]);
-          setPopValue(value);
-        });
-    },
-    [luclasses],
-  );
+  const getData = useCallback((url, type) => {
+    fetch(url)
+      .then(response => {
+        return response.text();
+      })
+      .then(value => {
+        if (type === 'irrigation') {
+          setIrrigation(value);
+        } else {
+          setEvapotranspiration(value);
+        }
+      });
+  }, []);
 
   useEffect(() => {
-    map.on('pointermove', function (evt) {
+    map.on('pointermove', evt => {
       if (evt.dragging) {
         return;
       }
 
-      let hit = map.forEachLayerAtPixel(
+      const hit = map.forEachLayerAtPixel(
         evt.pixel,
         (_, rgba) => {
           return true;
@@ -72,17 +66,22 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     });
 
     map.on('singleclick', evt => {
-      let res = map.getView().getResolution();
-      let proj = map.getView().getProjection();
+      const res = map.getView().getResolution();
+      const proj = map.getView().getProjection();
 
       const stringifyFunc = createStringXY(5);
 
-      let url = source.getFeatureInfoUrl(evt.coordinate, res, proj, {
-        INFO_FORMAT: 'text/html',
-        VERSION: '1.3.0',
-      });
+      const urls = source.map(s =>
+        s.getFeatureInfoUrl(evt.coordinate, res, proj, {
+          INFO_FORMAT: 'text/html',
+          VERSION: '1.3.0',
+        }),
+      );
 
-      getData(url, stringifyFunc(evt.coordinate));
+      getData(urls[0], 'irrigation');
+      getData(urls[1], 'evapotranspiration');
+
+      setPopCoords(stringifyFunc(evt.coordinate));
 
       const element: HTMLElement = document.getElementById(
         'popup-class',
@@ -90,7 +89,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
       const popup = new Overlay({
         position: evt.coordinate,
-        element: element,
+        element,
         positioning: OverlayPositioning.BOTTOM_LEFT,
         autoPan: true,
         autoPanAnimation: {
@@ -135,15 +134,17 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>{t('label_popup_class')}</td>
-          <td id="popup-lulc" style={{ padding: `2px 5px` }}>
-            {popclass ? popclass : t('popup_clickout')}
+          <td style={{ padding: `2px 5px` }}>{t('label_irrigated')}</td>
+          <td id="popup-value" style={{ padding: `2px 5px` }}>
+            {irrigation ? HtmlParser(irrigation) : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>{t('label_popup_code')}</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_evapo')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {popvalue ? popvalue : t('popup_clickout')}
+            {evapotranspiration
+              ? HtmlParser(evapotranspiration)
+              : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
@@ -154,7 +155,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             id="popup-coords"
             style={{ padding: `2px 5px`, borderRadius: `0px 0px 2px 0px` }}
           >
-            {popcoords ? popcoords : t('popup_clickout')}
+            {popcoords || t('popup_clickout')}
           </td>
         </tr>
       </tbody>
