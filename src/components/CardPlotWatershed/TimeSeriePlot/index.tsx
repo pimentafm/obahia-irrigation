@@ -89,7 +89,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
     },
     height: 400,
     xaxis: {
-      domain: ['2020-01-15', '2019-12-15'],
+      domain: ['2001-01-15', '2020-12-15'],
       rangeselector: {
         buttons: [
           {

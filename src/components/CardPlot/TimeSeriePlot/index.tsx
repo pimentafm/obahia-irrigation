@@ -84,7 +84,10 @@ const TimeSeriePlot: React.FC = () => {
     },
     height: 400,
     xaxis: {
-      domain: ['2001-01-15', '2020-12-15'],
+      rangeslider: {
+        type: 'date',
+      },
+      range: ['2001-01-15', '2020-12-15'],
       rangeselector: {
         buttons: [
           {
@@ -108,8 +111,6 @@ const TimeSeriePlot: React.FC = () => {
           { step: 'all' },
         ],
       },
-      rangeslider: { range: ['2001-01-15', '2020-12-15'] },
-      type: 'date',
     },
     yaxis: {
       //title: 'Amount (ha)',
