@@ -243,22 +243,22 @@ const Menu: React.FC<MenuProps> = ({
     switch (category) {
       case 'regional':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/region/irrigation_${defaultYear}_${defaultMonth}.tif`,
+          `ftp://obahia.dea.ufv.br/evapotranspiration/region/evapotranspiration_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
       case 'gcc':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/gcc/${defaultWatershed?.toLowerCase()}/irrigation_${defaultYear}_${defaultMonth}.tif`,
+          `ftp://obahia.dea.ufv.br/evapotranspiration/gcc/${defaultWatershed?.toLowerCase()}/evapotranspiration_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
       case 'drainage':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/drainage/${defaultCodeName?.code}/irrigation_${defaultCodeName?.code}_${defaultYear}_${defaultMonth}.tif`,
+          `ftp://obahia.dea.ufv.br/evapotranspiration/drainage/${defaultCodeName?.code}/evapotranspiration_${defaultCodeName?.code}_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
       case 'counties':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/irrigation/counties/irrigation_${defaultCodeName?.code}_${defaultYear}_${defaultMonth}.tif`,
+          `ftp://obahia.dea.ufv.br/evapotranspiration/counties/evapotranspiration_${defaultCodeName?.code}_${defaultYear}_${defaultMonth}.tif`,
         );
         break;
     }
@@ -379,7 +379,10 @@ const Menu: React.FC<MenuProps> = ({
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
-          downloadURL={downloadURL}
+          downloadURL={downloadURL.replace(
+            /evapotranspiration/gi,
+            'irrigation',
+          )}
         />
 
         <div className="static-layers">

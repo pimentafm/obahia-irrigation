@@ -91,7 +91,6 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
                 }}
               />
             </Popover>
-
             <Popover placement="right" content={t('tooltip_ftp')}>
               <FaDatabase
                 id="close-popup"
