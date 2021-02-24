@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlotDrainage from '../CardPlotDrainage';
 
-// import Popup from '../../components/Popup';
+import Popup from '../../components/Popup';
 
 interface DrainageData {
   code: number;
@@ -234,7 +234,10 @@ const Map: React.FC<MapProps> = ({
         map={map}
       />
 
-      {/* <Popup map={map} source={irrigation_source} /> */}
+      <Popup
+        map={map}
+        source={[irrigation_source, evapotranspiration_source]}
+      />
 
       <CardPlotDrainage
         code={codeName.code}

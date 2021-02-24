@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlot from '../CardPlotWatershed';
 
-//import Popup from '../../components/Popup';
+import Popup from '../../components/Popup';
 
 interface MapProps {
   defaultYear: number;
@@ -209,7 +209,10 @@ const Map: React.FC<MapProps> = ({
         map={map}
       />
 
-      {/* <Popup map={map} source={irrigation_source} /> */}
+      <Popup
+        map={map}
+        source={[irrigation_source, evapotranspiration_source]}
+      />
 
       <CardPlot
         watershed={watershed.toLowerCase()}
