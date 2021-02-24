@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlotDrainage from '../CardPlotDrainage';
 
-import Popup from '../../components/Popup';
+// import Popup from '../../components/Popup';
 
 interface DrainageData {
   code: number;

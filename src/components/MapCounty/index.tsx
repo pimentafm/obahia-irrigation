@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlot from '../CardPlotCounty';
 
-import Popup from '../../components/Popup';
+// import Popup from '../../components/Popup';
 
 interface CountyData {
   code: number;
