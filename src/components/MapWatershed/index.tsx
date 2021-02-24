@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlot from '../CardPlotWatershed';
 
-import Popup from '../../components/Popup';
+//import Popup from '../../components/Popup';
 
 interface MapProps {
   defaultYear: number;
@@ -42,7 +42,10 @@ const Map: React.FC<MapProps> = ({
   defaultWatershed,
 }) => {
   const [irrigation] = useState(
-    new TileLayer({ visible: true, className: 'irrigation-layer' }),
+    new TileLayer({ visible: false, className: 'irrigation-layer' }),
+  );
+  const [evapotranspiration] = useState(
+    new TileLayer({ visible: true, className: 'evapotranspiration-layer' }),
   );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
@@ -72,7 +75,7 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, irrigation, highways, hidrography],
+      layers: [osm, irrigation, evapotranspiration, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -115,6 +118,19 @@ const Map: React.FC<MapProps> = ({
     crossOrigin: 'anonymous',
   });
 
+  const evapotranspiration_source = new TileWMS({
+    url: wms.defaults.baseURL + 'evapotranspirationWatersheds.map',
+    params: {
+      year: year,
+      month: month,
+      ws: watershed.toLowerCase(),
+      LAYERS: 'evapotranspiration',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
   highways.set('name', 'highways');
   highways.setSource(highways_source);
   highways.getSource().refresh();
@@ -126,6 +142,10 @@ const Map: React.FC<MapProps> = ({
   irrigation.set('name', 'irrigation');
   irrigation.setSource(irrigation_source);
   irrigation.getSource().refresh();
+
+  evapotranspiration.set('name', 'evapotranspiration');
+  evapotranspiration.setSource(evapotranspiration_source);
+  evapotranspiration.getSource().refresh();
 
   const handleYear = useCallback(
     y => {
