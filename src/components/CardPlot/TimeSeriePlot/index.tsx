@@ -108,7 +108,12 @@ const TimeSeriePlot: React.FC = () => {
             step: 'month',
             stepmode: '',
           },
-          { step: 'all' },
+          {
+            count: 20,
+            label: 'all',
+            step: 'year',
+            stepmode: '',
+          },
         ],
       },
     },
