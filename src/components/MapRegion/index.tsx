@@ -62,7 +62,11 @@ const Map: React.FC<MapProps> = ({
     }),
   );
 
-  const osm = new TileLayer({ source: new OSM({ crossOrigin: 'anonymous' }) });
+  const osm = new TileLayer({
+    source: new OSM({
+      crossOrigin: 'anonymous',
+    }),
+  });
 
   const [map] = useState(
     new OlMap({

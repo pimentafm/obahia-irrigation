@@ -61,7 +61,7 @@ const TimeSeriePlot: React.FC = () => {
       name: t('label_flow'),
       yaxis: 'y2',
       hovertemplate: '%{y:.2f}</sup> m<sup>3</sup>/s<extra></extra>',
-      line: { color: '#f76707', shape: 'hvh' },
+      line: { color: '#868e96', shape: 'hvh' },
       mode: 'lines+markers',
     },
     {
@@ -71,7 +71,7 @@ const TimeSeriePlot: React.FC = () => {
       name: t('label_area'),
       yaxis: 'y3',
       hovertemplate: '%{y:.2f} ha<extra></extra>',
-      line: { color: '#016513', shape: 'hvh' },
+      line: { color: '#9e1e1c', shape: 'hvh' },
       mode: 'lines+markers',
     },
   ];
@@ -124,8 +124,8 @@ const TimeSeriePlot: React.FC = () => {
     },
     yaxis2: {
       //title: 'Flow (m³/s)',
-      titlefont: { color: '#f76707' },
-      tickfont: { color: '#f76707' },
+      titlefont: { color: '#868e96' },
+      tickfont: { color: '#868e96' },
       anchor: 'free',
       overlaying: 'y',
       side: 'left',
@@ -133,8 +133,8 @@ const TimeSeriePlot: React.FC = () => {
     },
     yaxis3: {
       //title: 'Area (mm)',
-      titlefont: { color: '#016513' },
-      tickfont: { color: '#016513' },
+      titlefont: { color: '#9e1e1c' },
+      tickfont: { color: '#9e1e1c' },
       anchor: 'free',
       overlaying: 'y',
       side: 'left',
