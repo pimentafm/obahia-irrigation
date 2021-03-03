@@ -10,6 +10,7 @@ interface TimeSeriePlotData {
   totalvolume: Object;
   totalflow: Object;
   totalarea: Object;
+  totalevapo: Object;
   datestring: Object;
 }
 
@@ -19,6 +20,7 @@ const TimeSeriePlot: React.FC = () => {
   const [totalamount, setTotalAmount] = useState(null);
   const [totalflow, setTotalFlow] = useState(null);
   const [totalarea, setTotalArea] = useState(null);
+  const [totalevapo, setTotalEvapo] = useState(null);
   const [datestring, setDateString] = useState(null);
 
   useEffect(() => {
@@ -34,6 +36,9 @@ const TimeSeriePlot: React.FC = () => {
         );
         setTotalFlow(response.data.map((j: TimeSeriePlotData) => j.totalflow));
         setTotalArea(response.data.map((j: TimeSeriePlotData) => j.totalarea));
+        setTotalEvapo(
+          response.data.map((j: TimeSeriePlotData) => j.totalevapo),
+        );
         setDateString(
           response.data.map((j: TimeSeriePlotData) => j.datestring),
         );
@@ -74,6 +79,16 @@ const TimeSeriePlot: React.FC = () => {
       line: { color: '#9e1e1c', shape: 'hvh' },
       mode: 'lines+markers',
     },
+    {
+      x: datestring,
+      y: totalevapo,
+      type: 'scatter',
+      name: t('label_evapo'),
+      yaxis: 'y1',
+      hovertemplate: `%{y:.2f}</sup> ` + t('label_label') + `<extra></extra>`,
+      line: { color: '#fd8025', shape: 'hvh' },
+      mode: 'lines+markers',
+    },
   ];
   const layout = {
     title: {
@@ -100,7 +115,7 @@ const TimeSeriePlot: React.FC = () => {
             count: 6,
             label: '6m',
             step: 'month',
-            stepmode: '',
+            stepmode: 'backward',
           },
           {
             count: 12,
@@ -112,7 +127,7 @@ const TimeSeriePlot: React.FC = () => {
             count: 20,
             label: 'all',
             step: 'year',
-            stepmode: '',
+            stepmode: 'backward',
           },
         ],
       },
@@ -135,6 +150,15 @@ const TimeSeriePlot: React.FC = () => {
       //title: 'Area (mm)',
       titlefont: { color: '#9e1e1c' },
       tickfont: { color: '#9e1e1c' },
+      anchor: 'free',
+      overlaying: 'y',
+      side: 'left',
+      position: 0.04,
+    },
+    yaxis4: {
+      //title: 'Area (mm)',
+      titlefont: { color: '#fd8025' },
+      tickfont: { color: '#fd8025' },
       anchor: 'free',
       overlaying: 'y',
       side: 'left',
