@@ -55,7 +55,7 @@ const TimeSeriePlot: React.FC = () => {
       type: 'scatter',
       name: t('label_amount'),
       yaxis: 'y1',
-      hovertemplate: `%{y:.2f}</sup><extra></extra>`,
+      hovertemplate: `%{y:.2f} ` + t('label_label') + `</sup><extra></extra>`,
       line: { color: '#0000ff', shape: 'hvh' },
       mode: 'lines+markers',
     },
@@ -86,10 +86,7 @@ const TimeSeriePlot: React.FC = () => {
       name: t('label_plot_evapo'),
       yaxis: 'y1',
       hovertemplate:
-        `%{y:.2f}</sup> ` +
-        t('label_label') +
-        t('label_evapo_unit') +
-        `<extra></extra>`,
+        `%{y:.2f}</sup> ` + t('label_evapo_unit') + `<extra></extra>`,
       line: { color: '#fd8025', shape: 'hvh' },
       mode: 'lines+markers',
     },

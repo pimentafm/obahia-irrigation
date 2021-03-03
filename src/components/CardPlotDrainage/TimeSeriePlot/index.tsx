@@ -10,6 +10,7 @@ interface TimeSeriePlotData {
   totalvolume: Object;
   totalflow: Object;
   totalarea: Object;
+  totalevapo: Object;
   datestring: Object;
 }
 
@@ -23,6 +24,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
   const [totalamount, setTotalAmount] = useState(null);
   const [totalflow, setTotalFlow] = useState(null);
   const [totalarea, setTotalArea] = useState(null);
+  const [totalevapo, setTotalEvapo] = useState(null);
   const [datestring, setDateString] = useState(null);
 
   useEffect(() => {
@@ -39,6 +41,9 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
         );
         setTotalFlow(response.data.map((j: TimeSeriePlotData) => j.totalflow));
         setTotalArea(response.data.map((j: TimeSeriePlotData) => j.totalarea));
+        setTotalEvapo(
+          response.data.map((j: TimeSeriePlotData) => j.totalevapo),
+        );
         setDateString(
           response.data.map((j: TimeSeriePlotData) => j.datestring),
         );
@@ -55,7 +60,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
       type: 'scatter',
       name: t('label_amount'),
       yaxis: 'y1',
-      hovertemplate: '%{y:.2f}</sup> ' + t('label_label') + '<extra></extra>',
+      hovertemplate: `%{y:.2f}</sup><extra></extra>`,
       line: { color: '#0000ff', shape: 'hvh' },
       mode: 'lines+markers',
     },
@@ -79,8 +84,21 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
       line: { color: '#9e1e1c', shape: 'hvh' },
       mode: 'lines+markers',
     },
+    {
+      x: datestring,
+      y: totalevapo,
+      type: 'scatter',
+      name: t('label_plot_evapo'),
+      yaxis: 'y1',
+      hovertemplate:
+        `%{y:.2f}</sup> ` +
+        t('label_label') +
+        t('label_evapo_unit') +
+        `<extra></extra>`,
+      line: { color: '#fd8025', shape: 'hvh' },
+      mode: 'lines+markers',
+    },
   ];
-
   const layout = {
     title: {
       font: {
@@ -90,6 +108,8 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
     },
     height: 400,
     xaxis: {
+      linewidth: 2,
+      mirror: 'ticks',
       rangeslider: {
         type: 'date',
       },
@@ -106,7 +126,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
             count: 6,
             label: '6m',
             step: 'month',
-            stepmode: '',
+            stepmode: 'backward',
           },
           {
             count: 12,
@@ -118,33 +138,31 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ code }) => {
             count: 20,
             label: 'all',
             step: 'year',
-            stepmode: '',
+            stepmode: 'backward',
           },
         ],
       },
     },
     yaxis: {
-      //title: 'Amount (ha)',
-      titlefont: { color: '#030188' },
-      tickfont: { color: '#030188' },
+      zeroline: false,
+      showticklabels: false,
+      linewidth: 2,
+      mirror: 'ticks',
     },
     yaxis2: {
-      //title: 'Flow (m³/s)',
-      titlefont: { color: '#868e96' },
-      tickfont: { color: '#868e96' },
-      anchor: 'free',
       overlaying: 'y',
-      side: 'left',
-      position: 0.02,
+      zeroline: false,
+      showticklabels: false,
     },
     yaxis3: {
-      //title: 'Area (mm)',
-      titlefont: { color: '#9e1e1c' },
-      tickfont: { color: '#9e1e1c' },
-      anchor: 'free',
       overlaying: 'y',
-      side: 'left',
-      position: 0.04,
+      zeroline: false,
+      showticklabels: false,
+    },
+    yaxis4: {
+      overlaying: 'y',
+      zeroline: false,
+      showticklabels: false,
     },
     margin: { l: 60, r: 10, t: 10, b: 30 },
     transition: {
