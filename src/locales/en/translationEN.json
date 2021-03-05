@@ -52,7 +52,7 @@
   "timeseriesplot_link_drainage": "drainage area in",
   "timeseriesplot_title_counties": "Irrigated Crop in",
   "timeseriesplot_link_counties": "municipality in",
-  "label_irrigated": "Irrigated",
+  "label_irrigated": "Irrigated crop class value",
   "label_notirrigated": "Not irrigated",
   "label_evapo_unit": "mm/mo",
   "label_evapo": "Evapotranspiration",

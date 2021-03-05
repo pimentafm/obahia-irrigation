@@ -143,7 +143,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           <td style={{ padding: `2px 5px` }}>{t('label_evapo')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {evapotranspiration
-              ? HtmlParser(evapotranspiration)
+              ? HtmlParser(evapotranspiration) + t('label_label')
               : 'Fora da camada'}
           </td>
         </tr>

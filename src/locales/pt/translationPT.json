@@ -52,7 +52,7 @@
   "timeseriesplot_link_drainage": "em",
   "timeseriesplot_title_counties": "Agricutura Irrigada no município de",
   "timeseriesplot_link_counties": "em",
-  "label_irrigated": "Irrigado",
+  "label_irrigated": "Valor da classe de agricultura irrigada",
   "label_notirrigated": "Não irrigado",
   "label_evapo_unit": "mm/mês",
   "label_evapo": "Evapotranspiração",
