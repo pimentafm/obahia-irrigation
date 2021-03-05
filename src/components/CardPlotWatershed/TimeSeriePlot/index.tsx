@@ -61,7 +61,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       name: t('label_amount'),
       yaxis: 'y1',
       hovertemplate: `%{y:.2f} ` + t('label_label') + `</sup><extra></extra>`,
-      line: { color: '#0000ff', shape: 'hvh' },
+      line: { color: '#adb5bd', shape: 'hvh' },
       mode: 'lines+markers',
     },
     {
@@ -71,7 +71,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       name: t('label_flow'),
       yaxis: 'y2',
       hovertemplate: '%{y:.2f}</sup> m<sup>3</sup>/s<extra></extra>',
-      line: { color: '#868e96', shape: 'hvh' },
+      line: { color: '#0000ff', shape: 'hvh' },
       mode: 'lines+markers',
     },
     {
@@ -81,7 +81,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       name: t('label_area'),
       yaxis: 'y3',
       hovertemplate: '%{y:.2f} ha<extra></extra>',
-      line: { color: '#9e1e1c', shape: 'hvh' },
+      line: { color: '#016513', shape: 'hvh' },
       mode: 'lines+markers',
     },
     {
@@ -96,6 +96,7 @@ const TimeSeriePlot: React.FC<TimeSeriePlotProps> = ({ watershed }) => {
       mode: 'lines+markers',
     },
   ];
+
   const layout = {
     title: {
       font: {
