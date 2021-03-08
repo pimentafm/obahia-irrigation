@@ -56,7 +56,7 @@ const TimeSeriePlot: React.FC = () => {
       name: t('label_amount'),
       yaxis: 'y1',
       hovertemplate: `%{y:.2f} ` + t('label_label') + `</sup><extra></extra>`,
-      line: { color: '#adb5bd', shape: 'hvh' },
+      line: { color: '#868e96', shape: 'hvh' },
       mode: 'lines+markers',
     },
     {
