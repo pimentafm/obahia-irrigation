@@ -134,7 +134,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>{t('label_irrigated')}</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_popup')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {irrigation ? HtmlParser(irrigation) : 'Fora da camada'}
           </td>
