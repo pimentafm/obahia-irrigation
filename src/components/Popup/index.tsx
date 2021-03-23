@@ -23,8 +23,9 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const { t } = useTranslation();
 
   const [popcoords, setPopCoords] = useState<string>();
-  const [irrigation, setIrrigation] = useState<string>();
+  const [amount, setAmount] = useState<string>();
   const [evapotranspiration, setEvapotranspiration] = useState<string>();
+  const [irrigation, setIrrigation] = useState<string>();
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -42,8 +43,10 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
       .then(value => {
         if (type === 'irrigation') {
           setIrrigation(value);
-        } else {
+        } else if (type === 'evapotranspiration') {
           setEvapotranspiration(value);
+        } else {
+          setAmount(value);
         }
       });
   }, []);
@@ -78,8 +81,9 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         }),
       );
 
-      getData(urls[0], 'irrigation');
+      getData(urls[2], 'amount');
       getData(urls[1], 'evapotranspiration');
+      getData(urls[0], 'irrigation');
 
       setPopCoords(stringifyFunc(evt.coordinate));
 
@@ -134,9 +138,9 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>{t('label_popup')}</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_amount')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {irrigation ? HtmlParser(irrigation) : 'Fora da camada'}
+            {amount ? HtmlParser(amount) + t('label_label') : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
@@ -145,6 +149,12 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             {evapotranspiration
               ? HtmlParser(evapotranspiration) + t('label_label')
               : 'Fora da camada'}
+          </td>
+        </tr>
+        <tr style={{ background: '#fff' }}>
+          <td style={{ padding: `2px 5px` }}>{t('label_popup')}</td>
+          <td id="popup-value" style={{ padding: `2px 5px` }}>
+            {irrigation ? HtmlParser(irrigation) : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>

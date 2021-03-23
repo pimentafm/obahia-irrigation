@@ -357,13 +357,27 @@ const Menu: React.FC<MenuProps> = ({
           onChange={handleDate}
           placeholder="2020-12"
         />
+        <LayerSwitcher
+          name="amount"
+          label={t('label_amount')}
+          handleLayerOpacity={handleLayerOpacity}
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={true}
+          legendIsVisible={true}
+          layerInfoIsVisible={false}
+          switchColor="#3e8ec4"
+          // downloadURL={downloadURL.replace(
+          //   /evapotranspiration/gi,
+          //   'amount',
+          // )}
+        />
 
         <LayerSwitcher
           name="evapotranspiration"
           label={t('label_evapo')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={true}
+          layerIsVisible={false}
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
