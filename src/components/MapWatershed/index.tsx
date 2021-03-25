@@ -41,11 +41,14 @@ const Map: React.FC<MapProps> = ({
   defaultCategory,
   defaultWatershed,
 }) => {
+  const [amount] = useState(
+    new TileLayer({ visible: true, className: 'amount-layer' }),
+  );
   const [irrigation] = useState(
     new TileLayer({ visible: false, className: 'irrigation-layer' }),
   );
   const [evapotranspiration] = useState(
-    new TileLayer({ visible: true, className: 'evapotranspiration-layer' }),
+    new TileLayer({ visible: false, className: 'evapotranspiration-layer' }),
   );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
@@ -75,7 +78,14 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, irrigation, evapotranspiration, highways, hidrography],
+      layers: [
+        osm,
+        irrigation,
+        evapotranspiration,
+        amount,
+        highways,
+        hidrography,
+      ],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -131,6 +141,22 @@ const Map: React.FC<MapProps> = ({
     crossOrigin: 'anonymous',
   });
 
+  const zeroPad = (num: number, places: number) =>
+    String(num).padStart(places, '0');
+
+  const amount_source = new TileWMS({
+    url: wms.defaults.baseURL + 'amountWatersheds.map',
+    params: {
+      ws: watershed.toLowerCase(),
+      year: year,
+      month: zeroPad(month + 1, 2),
+      LAYERS: 'amount',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
   highways.set('name', 'highways');
   highways.setSource(highways_source);
   highways.getSource().refresh();
@@ -138,6 +164,10 @@ const Map: React.FC<MapProps> = ({
   hidrography.set('name', 'hidrography');
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
+
+  amount.set('name', 'amount');
+  amount.setSource(amount_source);
+  amount.getSource().refresh();
 
   irrigation.set('name', 'irrigation');
   irrigation.setSource(irrigation_source);
@@ -211,7 +241,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup
         map={map}
-        source={[irrigation_source, evapotranspiration_source]}
+        source={[irrigation_source, evapotranspiration_source, amount_source]}
       />
 
       <CardPlot

@@ -172,8 +172,6 @@ const Map: React.FC<MapProps> = ({
     crossOrigin: 'anonymous',
   });
 
-  console.log(month);
-
   watersheds.set('name', 'watersheds');
   watersheds.setSource(watersheds_source);
   watersheds.getSource().refresh();
