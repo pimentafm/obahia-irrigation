@@ -47,7 +47,7 @@
   "label_plot_amount": "Lâmina irrigada (mm/mês)",
   "label_plot_area": "Área efetivamente irrigada (ha)",
   "label_plot_flow": "Vazão de irrigação (m³/s)",
-  "label_plot_evapo": "Evapotranspiração(mm/mês)",
+  "label_plot_evapo": "Evapotranspiração real (mm/mês)",
   "timeseriesplot_title": "Agricutura Irrigada (2001 -2020)",
   "timeseriesplot_title_watershed": "Agricultura Irrigada na Bacia do Rio",
   "timeseriesplot_link_watershed": "em",
@@ -58,11 +58,11 @@
   "label_irrigated": "Irrigado",
   "label_notirrigated": "Não irrigado",
   "label_evapo_unit": "mm/mês",
-  "label_evapo": "Evapotranspiração",
+  "label_evapo": "Evapotranspiração real",
   "label_otheruses": "Outros usos",
   "label_amount": "Lâmina irrigada",
   "label_flow": "Vazão de irrigação",
   "label_area": "Área efetivamente irrigada",
   "label_label": "mm/mês",
-  "label_popup": "Valor da classe"
+  "label_popup": "Classe"
 }

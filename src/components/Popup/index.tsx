@@ -27,6 +27,8 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const [evapotranspiration, setEvapotranspiration] = useState<string>();
   const [irrigation, setIrrigation] = useState<string>();
 
+  let luclasses = [t('label_irrigated'), t('label_notirrigated')];
+
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
       'popup-class',
@@ -42,7 +44,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
       })
       .then(value => {
         if (type === 'irrigation') {
-          setIrrigation(value);
+          setIrrigation(luclasses[parseInt(value) - 1]);
         } else if (type === 'evapotranspiration') {
           setEvapotranspiration(value);
         } else {
@@ -139,13 +141,13 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         </tr>
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_amount')}</td>
-          <td id="popup-value" style={{ padding: `2px 5px` }}>
+          <td id="popup-amount" style={{ padding: `2px 5px` }}>
             {amount ? HtmlParser(amount) + t('label_label') : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_evapo')}</td>
-          <td id="popup-value" style={{ padding: `2px 5px` }}>
+          <td id="popup-evapo" style={{ padding: `2px 5px` }}>
             {evapotranspiration
               ? HtmlParser(evapotranspiration) + t('label_label')
               : 'Fora da camada'}
@@ -153,7 +155,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         </tr>
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_popup')}</td>
-          <td id="popup-value" style={{ padding: `2px 5px` }}>
+          <td id="popup-class" style={{ padding: `2px 5px` }}>
             {irrigation ? HtmlParser(irrigation) : 'Fora da camada'}
           </td>
         </tr>
