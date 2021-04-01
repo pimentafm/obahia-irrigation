@@ -164,7 +164,7 @@ const Menu: React.FC<MenuProps> = ({
   const handleDate = useCallback(
     (_, dateString) => {
       const year = parseInt(dateString.split('-')[0]);
-      const month = parseInt(dateString.split('-')[1]) - 1;
+      const month = parseInt(dateString.split('-')[1]);
 
       handleYear(year);
       handleMonth(month);

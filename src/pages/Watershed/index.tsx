@@ -6,7 +6,7 @@ const Watershed: React.FC = () => {
   return (
     <Map
       defaultYear={2020}
-      defaultMonth={11}
+      defaultMonth={12}
       defaultCategory="gcc"
       defaultWatershed="Grande"
     />

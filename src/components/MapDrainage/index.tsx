@@ -128,11 +128,14 @@ const Map: React.FC<MapProps> = ({
     crossOrigin: 'anonymous',
   });
 
+  const zeroPad = (num: number, places: number) =>
+    String(num).padStart(places, '0');
+
   const irrigation_source = new TileWMS({
     url: wms.defaults.baseURL + 'irrigationDrainage.map',
     params: {
       year: year,
-      month: month,
+      month: zeroPad(month, 2),
       code: codeName.code,
       LAYERS: 'irrigation',
       TILED: true,
@@ -145,7 +148,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'evapotranspirationDrainage.map',
     params: {
       year: year,
-      month: month,
+      month: zeroPad(month, 2),
       code: codeName.code,
       LAYERS: 'evapotranspiration',
       TILED: true,
@@ -154,14 +157,11 @@ const Map: React.FC<MapProps> = ({
     crossOrigin: 'anonymous',
   });
 
-  const zeroPad = (num: number, places: number) =>
-    String(num).padStart(places, '0');
-
   const amount_source = new TileWMS({
     url: wms.defaults.baseURL + 'amountDrainage.map',
     params: {
       year: year,
-      month: zeroPad(month + 1, 2),
+      month: zeroPad(month, 2),
       code: codeName.code,
       LAYERS: 'amount',
       TILED: true,

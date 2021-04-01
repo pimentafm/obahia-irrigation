@@ -10,7 +10,7 @@ const Region: React.FC = () => {
     ReactGA.pageview('/');
   }, []);
   return (
-    <Map defaultYear={2020} defaultMonth={11} defaultCategory="regional" />
+    <Map defaultYear={2020} defaultMonth={12} defaultCategory="regional" />
   );
 };
 

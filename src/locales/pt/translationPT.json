@@ -56,11 +56,11 @@
   "label_notirrigated": "Não irrigado",
   "label_evapo_unit": "mm/mês",
   "label_evapo": "Evapotranspiração",
-  "label_plot_evapo": "Evapotranspiração (mm/mês)",
+  "label_plot_evapo": "Evapotranspiração",
   "label_otheruses": "Outros usos",
-  "label_amount": "Lâmina irrigada (mm/mês)",
-  "label_flow": "Vazão de irrigação (m³/s)",
-  "label_area": "Área efetivamente irrigada (ha)",
+  "label_amount": "Lâmina irrigada",
+  "label_flow": "Vazão de irrigação",
+  "label_area": "Área efetivamente irrigada",
   "label_label": "mm/mês",
   "label_popup": "Valor da classe"
 }
