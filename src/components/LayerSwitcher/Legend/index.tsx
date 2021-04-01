@@ -32,7 +32,7 @@ const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
             .replace('Outros usos', t('label_otheruses'));
         } else {
           html = html
-            .replace('mm/mo', t('label_evapo_unit'))
+            .replace(/mm\/mo/gi, t('label_evapo_unit'))
             .replace('Outros usos', t('label_otheruses'));
         }
 
