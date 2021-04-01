@@ -10,12 +10,11 @@ export const Container = styled.div<ContainerProps>`
   right: 0px;
   text-align: center;
 
-  width: 100vw;
+  width: 80vw;
   position: absolute;
-  bottom: 30px;
   z-index: 2;
 
-  transform: translateX(${({ ishidden }) => (ishidden ? 100 : 0)}vw);
+  transform: translateX(${({ ishidden }) => (ishidden ? 80 : 0)}vw);
   transition: 0.3s;
 
   label {

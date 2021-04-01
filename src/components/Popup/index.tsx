@@ -37,21 +37,24 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     element.style.display = 'none';
   }, []);
 
-  const getData = useCallback((url, type) => {
-    fetch(url)
-      .then(response => {
-        return response.text();
-      })
-      .then(value => {
-        if (type === 'irrigation') {
-          setIrrigation(luclasses[parseInt(value) - 1]);
-        } else if (type === 'evapotranspiration') {
-          setEvapotranspiration(value);
-        } else {
-          setAmount(value);
-        }
-      });
-  }, []);
+  const getData = useCallback(
+    (url, type) => {
+      fetch(url)
+        .then(response => {
+          return response.text();
+        })
+        .then(value => {
+          if (type === 'irrigation') {
+            setIrrigation(luclasses[parseInt(value) - 1]);
+          } else if (type === 'evapotranspiration') {
+            setEvapotranspiration(value);
+          } else {
+            setAmount(value);
+          }
+        });
+    },
+    [luclasses],
+  );
 
   useEffect(() => {
     map.on('pointermove', evt => {
