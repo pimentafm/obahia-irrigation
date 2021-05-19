@@ -74,6 +74,12 @@ const Menu: React.FC<MenuProps> = ({
   const [termsOfUseModal, setTermsOfUseModal] = useState<boolean>(false);
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
 
+  const [amountVisible, setAmountVisible] = useState(true);
+  const [evapotranspirationVisible, setEvapotranspirationVisible] = useState(
+    false,
+  );
+  const [irrigationVisible, setIrrigationVisible] = useState(false);
+
   const history = useHistory();
   const [category, setCategory] = useState(defaultCategory);
 
@@ -139,11 +145,33 @@ const Menu: React.FC<MenuProps> = ({
 
   const handleLayerVisibility = useCallback(
     (e, id) => {
-      const lyr_name = id; //obj.target.name;
+      const lyr_name = id; // obj.target.name;
+
+      if (lyr_name === 'amount') {
+        setAmountVisible(e);
+        setEvapotranspirationVisible(!e);
+        setIrrigationVisible(!e);
+      }
+
+      if (lyr_name === 'evapotranspiration') {
+        setAmountVisible(!e);
+        setEvapotranspirationVisible(e);
+        setIrrigationVisible(!e);
+      }
+
+      if (lyr_name === 'irrigation') {
+        setAmountVisible(!e);
+        setEvapotranspirationVisible(!e);
+        setIrrigationVisible(e);
+      }
 
       map.getLayers().forEach(lyr => {
-        if (lyr.get('name') === lyr_name) {
-          lyr.setVisible(e);
+        if (lyr.getClassName() !== 'ol-layer') {
+          if (lyr.get('name') === lyr_name) {
+            lyr.setVisible(e);
+          } else {
+            lyr.setVisible(!e);
+          }
         }
       });
     },
@@ -362,7 +390,7 @@ const Menu: React.FC<MenuProps> = ({
           label={t('label_amount')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={true}
+          layerIsVisible={amountVisible}
           legendIsVisible={true}
           layerInfoIsVisible={false}
           switchColor="#3e8ec4"
@@ -377,10 +405,10 @@ const Menu: React.FC<MenuProps> = ({
           label={t('label_evapo')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
+          layerIsVisible={evapotranspirationVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
-          switchColor="#1f5582"
+          switchColor="#ffa500"
           downloadURL={downloadURL}
         />
 
@@ -389,10 +417,10 @@ const Menu: React.FC<MenuProps> = ({
           label={t('label_irrigation')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
+          layerIsVisible={irrigationVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
-          switchColor="#1f5582"
+          switchColor="#006400"
           downloadURL={downloadURL.replace(
             /evapotranspiration/gi,
             'irrigation',
