@@ -23,6 +23,8 @@ import CardPlot from '../CardPlot';
 
 import Popup from '../../components/Popup';
 
+import { zeroPad } from '../utils/zeroPad';
+
 interface MapProps {
   defaultYear: number;
   defaultMonth: number;
@@ -132,9 +134,6 @@ const Map: React.FC<MapProps> = ({
     serverType: 'mapserver',
     crossOrigin: 'anonymous',
   });
-
-  const zeroPad = (num: number, places: number) =>
-    String(num).padStart(places, '0');
 
   const irrigation_source = new TileWMS({
     url: wms.defaults.baseURL + 'irrigationRegion.map',

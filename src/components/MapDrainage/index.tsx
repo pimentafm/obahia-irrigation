@@ -23,6 +23,7 @@ import CardPlotDrainage from '../CardPlotDrainage';
 
 import Popup from '../../components/Popup';
 
+import { zeroPad } from '../utils/zeroPad';
 interface DrainageData {
   code: number;
   name: string;
@@ -127,9 +128,6 @@ const Map: React.FC<MapProps> = ({
     serverType: 'mapserver',
     crossOrigin: 'anonymous',
   });
-
-  const zeroPad = (num: number, places: number) =>
-    String(num).padStart(places, '0');
 
   const irrigation_source = new TileWMS({
     url: wms.defaults.baseURL + 'irrigationDrainage.map',
