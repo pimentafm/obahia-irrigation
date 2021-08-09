@@ -178,6 +178,19 @@ const Menu: React.FC<MenuProps> = ({
     [map],
   );
 
+  const handleStaticLayerVisibility = useCallback(
+    (e, id) => {
+      const lyr_name = id;
+
+      map.getLayers().forEach(lyr => {
+        if (lyr.get('name') === lyr_name) {
+          lyr.setVisible(e);
+        }
+      });
+    },
+    [map],
+  );
+
   const handleLayerOpacity = useCallback(
     (opacity, lyr_name) => {
       map.getLayers().forEach(lyr => {
@@ -431,7 +444,7 @@ const Menu: React.FC<MenuProps> = ({
           <StaticLayerSwitcher
             name="hidrography"
             label={t('label_hidrography')}
-            handleLayerVisibility={handleLayerVisibility}
+            handleLayerVisibility={handleStaticLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -440,7 +453,7 @@ const Menu: React.FC<MenuProps> = ({
           <StaticLayerSwitcher
             name="highways"
             label={t('label_highways')}
-            handleLayerVisibility={handleLayerVisibility}
+            handleLayerVisibility={handleStaticLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -452,7 +465,7 @@ const Menu: React.FC<MenuProps> = ({
               <StaticLayerSwitcher
                 name="watersheds"
                 label={t('label_watersheds')}
-                handleLayerVisibility={handleLayerVisibility}
+                handleLayerVisibility={handleStaticLayerVisibility}
                 layerIsVisible={true}
                 legendIsVisible={false}
                 layerInfoIsVisible={false}
@@ -461,7 +474,7 @@ const Menu: React.FC<MenuProps> = ({
               <StaticLayerSwitcher
                 name="counties"
                 label={t('label_counties')}
-                handleLayerVisibility={handleLayerVisibility}
+                handleLayerVisibility={handleStaticLayerVisibility}
                 layerIsVisible={false}
                 legendIsVisible={false}
                 layerInfoIsVisible={false}
